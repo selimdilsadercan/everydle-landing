@@ -1,28 +1,32 @@
-import { IFAQ } from "@/types";
-import { siteDetails } from "./siteDetails";
-
-export const faqs: IFAQ[] = [
+export const faqs = [
   {
-    question: `Is ${siteDetails.siteName} secure?`,
+    question: "Everydle ücretsiz mi?",
     answer:
-      "Absolutely. We use bank-level encryption to protect your data and never store your login information. Plus, our biometric authentication adds an extra layer of security.",
+      "Evet! Everydle'ı tamamen ücretsiz indirebilir ve tüm günlük bulmacaları oynayabilirsiniz. Geçmiş günlere erişim ve reklamsız deneyim için EverydiePlus premium aboneliğimiz mevcuttur.",
   },
   {
-    question: `Can I use ${siteDetails.siteName} on multiple devices?`,
-    answer: `Absolutely! Your ${siteDetails.siteName} account syncs seamlessly across all your devices - smartphone, tablet, and computer.`,
-  },
-  {
-    question: "Can I connect all my bank accounts?",
-    answer: `Yes! ${siteDetails.siteName} supports connections with over 10,000 financial institutions worldwide. Simply log in through our secure portal to link your accounts.`,
-  },
-  {
-    question:
-      "Do I need any financial expertise to use the investing features?",
+    question: "Her gün kaç oyun oynayabilirim?",
     answer:
-      "Not at all! Our expert-curated portfolios and educational resources make investing accessible to everyone, regardless of experience level.",
+      "Her gün 8 farklı oyun türünde yeni bulmacalar açılır. Gece yarısı sıfırlanır ve yeni bulmacalar gelir. Premium üyelik ile geçmiş günlerin bulmacalarını da oynayabilirsiniz.",
   },
   {
-    question: "What if I need help using the app?",
-    answer: `Our dedicated support team is available 24/7 via chat or email. Plus, we offer extensive in-app tutorials and a comprehensive knowledge base to help you make the most of ${siteDetails.siteName}.`,
+    question: "Arkadaşlarımla nasıl yarışabilirim?",
+    answer:
+      "Arkadaşlarınızı davet linki ile ekleyebilir, günlük sonuçlarınızı karşılaştırabilir ve liderlik tablosunda yerinizi görebilirsiniz. Ayrıca düello modunda canlı olarak arkadaşlarınızla yarışabilirsiniz.",
+  },
+  {
+    question: "Hangi platformlarda kullanılabilir?",
+    answer:
+      "Everydle, iOS (iPhone, iPad) ve Android cihazlarda kullanılabilir. App Store ve Google Play Store'dan ücretsiz indirebilirsiniz. Cihazlar arası senkronizasyon ile tüm ilerlemeniz korunur.",
+  },
+  {
+    question: "İpuçları nasıl çalışıyor?",
+    answer:
+      "Her oyun için ipucu kullanabilirsiniz. İpuçları coin ile satın alınabilir veya günlük görevleri tamamlayarak kazanılabilir. Sandık ödülleri ile de ipucu kazanma şansınız var.",
+  },
+  {
+    question: "EverydiePlus aboneliği ne sağlar?",
+    answer:
+      "EverydiePlus ile tüm geçmiş günlere sınırsız erişim, reklamları kaldırma ve özel rozetler kazanma imkanınız olur. Aylık ₺29.99 veya yıllık ₺199.99 ödeme seçenekleri mevcuttur.",
   },
 ];

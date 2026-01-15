@@ -1,13 +1,13 @@
 export const siteDetails = {
   siteName: "Everydle",
-  siteUrl: "https://wedo-landing.vercel.app/",
+  siteUrl: "https://everydle.com",
   metadata: {
-    title: "Wedo - Next.js and Tailwind CSS Landing Page Template",
+    title: "Everydle - Türkiye'nin En Popüler Günlük Bulmaca Oyunları",
     description:
-      "Wedo empowers businesses with cutting-edge technology solutions to drive success and efficiency.",
+      "Her gün 8 farklı bulmaca türü, arkadaşlarınla yarış, ödüller kazan! Wordle, Contexto, Moviedle ve daha fazlası tek uygulamada.",
   },
-  language: "en-us",
-  locale: "en-US",
-  siteLogo: `${process.env.BASE_PATH || ""}/images/logo.png`, // or use a string for the logo e.g. "TechStartup"
-  googleAnalyticsId: "", // e.g. G-XXXXXXX,
+  language: "tr",
+  locale: "tr-TR",
+  siteLogo: `${process.env.BASE_PATH || ""}/images/logo.png`,
+  googleAnalyticsId: "",
 };

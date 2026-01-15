@@ -10,20 +10,25 @@ interface PlayStoreButtonProps {
 
 const PlayStoreButton = ({ dark, className }: PlayStoreButtonProps) => {
   return (
-    <a href={ctaDetails.googlePlayUrl}>
+    <a
+      href={ctaDetails.googlePlayUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <button
         type="button"
         className={clsx(
-          "flex items-center justify-center min-w-[205px] mt-3 px-6 h-14 rounded-full w-full sm:w-fit",
+          "flex items-center justify-center min-w-[205px] mt-3 px-6 h-14 rounded-2xl w-full sm:w-fit transition-all duration-300 shadow-lg",
           {
-            "text-white bg-foreground": dark,
-            "text-foreground bg-white": !dark,
+            "text-white bg-slate-800 border border-slate-700 hover:bg-slate-700 hover:border-slate-600 shadow-slate-900/50":
+              dark,
+            "text-slate-900 bg-white hover:bg-slate-100": !dark,
           },
           className
         )}
       >
         <div className="mr-3">
-          <svg viewBox="30 336.7 120.9 129.2" width="30">
+          <svg viewBox="30 336.7 120.9 129.2" width="28">
             <path
               fill="#FFD400"
               d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7  c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"
@@ -42,10 +47,10 @@ const PlayStoreButton = ({ dark, className }: PlayStoreButtonProps) => {
             ></path>
           </svg>
         </div>
-        <div>
-          <div className="text-xs">Yakında</div>
-          <div className="-mt-1 font-sans text-xl font-semibold">
-            Google Play'de
+        <div className="text-left">
+          <div className="text-xs text-slate-400">Yakında</div>
+          <div className="-mt-1 font-sans text-lg font-semibold">
+            Google Play&apos;de
           </div>
         </div>
       </button>

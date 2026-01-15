@@ -1,101 +1,147 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
-import { Transition } from "@headlessui/react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineXMark, HiBars3 } from "react-icons/hi2";
-
-import Container from "./Container";
-import Logo from "./Logo";
 import { siteDetails } from "@/data/siteDetails";
-import { menuItems } from "@/data/menuItems";
+
+const menuItems = [
+  { text: "Oyunlar", url: "#games" },
+  { text: "Özellikler", url: "#features" },
+  { text: "Nasıl Oynanır", url: "#how-it-works" },
+  { text: "SSS", url: "#faq" },
+];
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <header className="bg-transparent fixed top-0 left-0 right-0 md:absolute z-50 mx-auto w-full">
-      <Container className="!px-0">
-        <nav className="shadow-md md:shadow-none bg-white md:bg-transparent mx-auto flex justify-between items-center py-2 px-5 md:py-10">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-slate-900/80 backdrop-blur-xl border-b border-slate-800/50 py-3"
+          : "bg-transparent py-4"
+      }`}
+    >
+      <div className="container-custom">
+        <nav className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <Logo />
-            <span className="manrope text-xl font-semibold text-foreground cursor-pointer">
+          <Link href="/" className="flex items-center gap-3 group">
+            <motion.div
+              whileHover={{ rotate: 10, scale: 1.1 }}
+              className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-indigo-500/20"
+            >
+              🎮
+            </motion.div>
+            <span className="text-xl font-bold text-white group-hover:text-gradient transition-all duration-300">
               {siteDetails.siteName}
             </span>
           </Link>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex space-x-6">
-            <li>
-              <Link
-                href="#cta"
-                className="text-black bg-primary hover:bg-primary-accent px-8 py-3 rounded-full transition-colors"
-              >
-                Bizle İletişime Geç
-              </Link>
-            </li>
-          </ul>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={toggleMenu}
-              type="button"
-              className="bg-primary text-black focus:outline-none rounded-full w-10 h-10 flex items-center justify-center"
-              aria-controls="mobile-menu"
-              aria-expanded={isOpen}
-            >
-              {isOpen ? (
-                <HiOutlineXMark className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <HiBars3 className="h-6 w-6" aria-hidden="true" />
-              )}
-              <span className="sr-only">Toggle navigation</span>
-            </button>
-          </div>
-        </nav>
-      </Container>
-
-      {/* Mobile Menu with Transition */}
-      <Transition
-        show={isOpen}
-        enter="transition ease-out duration-200 transform"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="transition ease-in duration-75 transform"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
-      >
-        <div id="mobile-menu" className="md:hidden bg-white shadow-lg">
-          <ul className="flex flex-col space-y-4 pt-1 pb-6 px-6">
+          <ul className="hidden md:flex items-center gap-8">
             {menuItems.map((item) => (
               <li key={item.text}>
                 <Link
                   href={item.url}
-                  className="text-foreground hover:text-primary block"
-                  onClick={toggleMenu}
+                  className="text-slate-300 hover:text-white transition-colors relative group"
                 >
                   {item.text}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="#cta"
-                className="text-black bg-primary hover:bg-primary-accent px-5 py-2 rounded-full block w-fit"
-                onClick={toggleMenu}
-              >
-                Get Started
-              </Link>
-            </li>
           </ul>
-        </div>
-      </Transition>
+
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center gap-4">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              className="btn-primary text-sm py-2.5 px-6"
+            >
+              Şimdi İndir
+            </motion.button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={toggleMenu}
+              className="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-xl flex items-center justify-center text-white transition-colors"
+            >
+              {isOpen ? (
+                <HiOutlineXMark className="h-6 w-6" />
+              ) : (
+                <HiBars3 className="h-6 w-6" />
+              )}
+            </motion.button>
+          </div>
+        </nav>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-slate-800/50"
+          >
+            <div className="container-custom py-6">
+              <ul className="flex flex-col gap-4">
+                {menuItems.map((item, index) => (
+                  <motion.li
+                    key={item.text}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link
+                      href={item.url}
+                      className="block text-lg text-slate-300 hover:text-white transition-colors py-2"
+                      onClick={toggleMenu}
+                    >
+                      {item.text}
+                    </Link>
+                  </motion.li>
+                ))}
+                <motion.li
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: menuItems.length * 0.1 }}
+                  className="pt-4 border-t border-slate-800"
+                >
+                  <motion.button
+                    whileTap={{ scale: 0.98 }}
+                    className="btn-primary w-full"
+                    onClick={toggleMenu}
+                  >
+                    Şimdi İndir
+                  </motion.button>
+                </motion.li>
+              </ul>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

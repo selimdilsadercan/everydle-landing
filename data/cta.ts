@@ -1,7 +1,6 @@
 export const ctaDetails = {
-  heading: "Bugün Ne Yapsak? Wedo’yla Keşfet.",
-  subheading:
-    "Film, oyun, etkinlik ya da keşfetmek isteyeceğin yepyeni deneyimler. Wedo ile aktivite keşfetmek çok kolay!",
-  appStoreUrl: "#",
-  googlePlayUrl: "#",
+  appStoreUrl: "https://apps.apple.com/tr/app/everydle",
+  googlePlayUrl:
+    "https://play.google.com/store/apps/details?id=com.everydle.app",
+  webAppUrl: "https://app.playeverydle.com",
 };

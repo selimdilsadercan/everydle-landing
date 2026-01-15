@@ -1,18 +1,21 @@
 import Hero from "@/components/Hero";
+import GamesSection from "@/components/GamesSection";
+import AppPreviewSection from "@/components/AppPreviewSection";
+import FeaturesSection from "@/components/FeaturesSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQ from "@/components/FAQ";
-import Benefits from "@/components/Benefits/Benefits";
-import Container from "@/components/Container";
-import CTA from "@/components/CTA";
 
 const HomePage: React.FC = () => {
   return (
     <>
       <Hero />
-      <Container>
-        <Benefits />
-
-        <CTA />
-      </Container>
+      <GamesSection />
+      <AppPreviewSection />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <TestimonialsSection />
+      <FAQ />
     </>
   );
 };
