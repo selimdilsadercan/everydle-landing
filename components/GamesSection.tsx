@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { games, Game } from "@/data/games";
+import { gamesArray, Game } from "@/data/games";
 
 const GameCard: React.FC<{ game: Game; index: number }> = ({ game, index }) => {
   const getDifficultyClass = (difficulty: string) => {
@@ -25,16 +25,28 @@ const GameCard: React.FC<{ game: Game; index: number }> = ({ game, index }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -8, scale: 1.02 }}
-      className="group relative bg-glass rounded-3xl p-6 cursor-pointer game-card overflow-hidden"
+      className={`group relative bg-glass rounded-3xl p-6 cursor-pointer game-card overflow-hidden border-2 border-transparent hover:${game.borderColor}`}
     >
+      {/* New / Popular Badge */}
+      {game.isNew && (
+        <div className="absolute top-4 right-4 bg-pink-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+          YENİ
+        </div>
+      )}
+      {game.isPopular && !game.isNew && (
+        <div className="absolute top-4 right-4 bg-amber-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+          🔥 Popüler
+        </div>
+      )}
+
       {/* Background Gradient */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br ${game.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+        className={`absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
       />
 
       {/* Glow Effect */}
       <div
-        className={`absolute -inset-px bg-gradient-to-br ${game.gradient} rounded-3xl opacity-0 group-hover:opacity-50 blur-xl transition-opacity duration-300`}
+        className={`absolute -inset-px bg-gradient-to-br ${game.color} rounded-3xl opacity-0 group-hover:opacity-50 blur-xl transition-opacity duration-300`}
       />
 
       <div className="relative z-10">
@@ -42,17 +54,21 @@ const GameCard: React.FC<{ game: Game; index: number }> = ({ game, index }) => {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <div
-              className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${game.gradient} flex items-center justify-center text-2xl shadow-lg`}
+              className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${game.color} flex items-center justify-center text-2xl shadow-lg ${game.shadowColor}`}
             >
               {game.icon}
             </div>
             <div>
               <h3 className="text-lg font-bold text-white group-hover:text-gradient transition-all duration-300">
-                {game.turkishName}
+                {game.name}
               </h3>
-              <p className="text-xs text-slate-500">{game.name}</p>
+              <p className="text-xs text-slate-500">{game.description}</p>
             </div>
           </div>
+        </div>
+
+        {/* Difficulty Badge */}
+        <div className="mb-3">
           <span
             className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyClass(
               game.difficulty
@@ -61,18 +77,6 @@ const GameCard: React.FC<{ game: Game; index: number }> = ({ game, index }) => {
             {game.difficulty}
           </span>
         </div>
-
-        {/* Type Badge */}
-        <div className="mb-3">
-          <span className="text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-full">
-            {game.type}
-          </span>
-        </div>
-
-        {/* Description */}
-        <p className="text-slate-400 text-sm mb-4 line-clamp-2">
-          {game.description}
-        </p>
 
         {/* Footer */}
         <div className="flex items-center justify-between pt-3 border-t border-slate-700/50">
@@ -157,7 +161,7 @@ const GamesSection: React.FC = () => {
 
         {/* Games Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {games.map((game, index) => (
+          {gamesArray.map((game, index) => (
             <GameCard key={game.id} game={game} index={index} />
           ))}
         </div>

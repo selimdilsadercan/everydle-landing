@@ -1,112 +1,122 @@
 export interface Game {
   id: string;
   name: string;
-  turkishName: string;
-  icon: string;
-  difficulty: "Kolay" | "Orta" | "Zor";
-  type: string;
   description: string;
+  icon: string;
+  color: string;
+  borderColor: string;
+  shadowColor: string;
+  difficulty: "Kolay" | "Orta" | "Zor";
   players: string;
-  gradient: string;
-  bgColor: string;
+  isNew: boolean;
+  isPopular: boolean;
 }
 
-export const games: Game[] = [
-  {
+export const games: Record<string, Game> = {
+  wordle: {
     id: "wordle",
     name: "Five Letters",
-    turkishName: "Beş Harf",
+    description: "Günün kelimesini bul",
     icon: "🔤",
+    color: "from-emerald-500 to-emerald-600",
+    borderColor: "border-emerald-400",
+    shadowColor: "shadow-emerald-500/30",
     difficulty: "Kolay",
-    type: "Kelime Bulmaca",
-    description: "Günün 5 harfli kelimesini 6 tahminde bul",
     players: "10K+",
-    gradient: "from-emerald-500 to-teal-600",
-    bgColor: "bg-emerald-500/10",
+    isNew: false,
+    isPopular: true,
   },
-  {
+  contexto: {
     id: "contexto",
     name: "Word Proximity",
-    turkishName: "Kelime Yakınlığı",
+    description: "Anlam benzerliğinden bul",
     icon: "💭",
+    color: "from-pink-500 to-pink-600",
+    borderColor: "border-pink-400",
+    shadowColor: "shadow-pink-500/30",
     difficulty: "Zor",
-    type: "Anlam Benzerliği",
-    description:
-      "Kelimelerin anlam benzerliğinden yola çıkarak hedef kelimeyi bul",
     players: "2K+",
-    gradient: "from-purple-500 to-violet-600",
-    bgColor: "bg-purple-500/10",
+    isNew: true,
+    isPopular: false,
   },
-  {
+  moviedle: {
     id: "moviedle",
     name: "CineGuess",
-    turkishName: "Film Tahmini",
+    description: "Günün filmini bul",
     icon: "🎬",
+    color: "from-red-500 to-red-600",
+    borderColor: "border-red-400",
+    shadowColor: "shadow-red-500/30",
     difficulty: "Orta",
-    type: "Film Tahmin",
-    description: "Günün filmini bulanık görsellerden ve ipuçlarından tahmin et",
     players: "6K+",
-    gradient: "from-amber-500 to-orange-600",
-    bgColor: "bg-amber-500/10",
+    isNew: false,
+    isPopular: true,
   },
-  {
+  redactle: {
     id: "redactle",
     name: "Hidden Article",
-    turkishName: "Gizli Makale",
+    description: "Makaleyi ortaya çıkar",
     icon: "📄",
+    color: "from-slate-500 to-slate-600",
+    borderColor: "border-slate-400",
+    shadowColor: "shadow-slate-500/30",
     difficulty: "Zor",
-    type: "Makale Bulmaca",
-    description: "Sansürlenmiş Wikipedia makalesinin başlığını tahmin et",
     players: "1K+",
-    gradient: "from-slate-500 to-zinc-600",
-    bgColor: "bg-slate-500/10",
+    isNew: false,
+    isPopular: false,
   },
-  {
+  quordle: {
     id: "quordle",
     name: "QuadGrid",
-    turkishName: "Dörtlü",
+    description: "4 kelimeyi aynı anda bul",
     icon: "4️⃣",
+    color: "from-blue-500 to-blue-600",
+    borderColor: "border-blue-400",
+    shadowColor: "shadow-blue-500/30",
     difficulty: "Orta",
-    type: "Çoklu Kelime Bulmaca",
-    description: "4 kelimeyi aynı anda 9 tahminde bul",
     players: "5K+",
-    gradient: "from-blue-500 to-indigo-600",
-    bgColor: "bg-blue-500/10",
+    isNew: false,
+    isPopular: true,
   },
-  {
+  octordle: {
     id: "octordle",
     name: "OctaGrid",
-    turkishName: "Sekizli",
+    description: "8 kelimeyi aynı anda bul",
     icon: "8️⃣",
+    color: "from-purple-500 to-purple-600",
+    borderColor: "border-purple-400",
+    shadowColor: "shadow-purple-500/30",
     difficulty: "Zor",
-    type: "Çoklu Kelime Bulmaca",
-    description: "8 kelimeyi aynı anda 13 tahminde bul",
     players: "3K+",
-    gradient: "from-rose-500 to-pink-600",
-    bgColor: "bg-rose-500/10",
+    isNew: false,
+    isPopular: false,
   },
-  {
+  nerdle: {
     id: "nerdle",
     name: "Equation",
-    turkishName: "Denklem",
+    description: "Denklemi bul",
     icon: "🔢",
+    color: "from-orange-500 to-orange-600",
+    borderColor: "border-orange-400",
+    shadowColor: "shadow-orange-500/30",
     difficulty: "Orta",
-    type: "Matematik Bulmaca",
-    description: "8 karakterlik matematik denklemini bul",
     players: "4K+",
-    gradient: "from-cyan-500 to-sky-600",
-    bgColor: "bg-cyan-500/10",
+    isNew: false,
+    isPopular: false,
   },
-  {
+  pokerdle: {
     id: "pokerdle",
     name: "Poker Puzzle",
-    turkishName: "Poker Bulmaca",
+    description: "Poker elini bul",
     icon: "🃏",
+    color: "from-yellow-500 to-yellow-600",
+    borderColor: "border-yellow-400",
+    shadowColor: "shadow-yellow-500/30",
     difficulty: "Orta",
-    type: "Poker Kartları Bulmaca",
-    description: "5 kartlık poker elini 7 tahminde bul",
     players: "1K+",
-    gradient: "from-red-500 to-rose-600",
-    bgColor: "bg-red-500/10",
+    isNew: true,
+    isPopular: false,
   },
-];
+};
+
+export const gamesArray = Object.values(games);
